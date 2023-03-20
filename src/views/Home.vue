@@ -1,7 +1,15 @@
 <template>
-  <HelloWorld />
+  <div></div>
 </template>
 
-<script setup>
-  import HelloWorld from '@/components/HelloWorld.vue'
+<script>
+import userStore from "@/store/user.store.js";
+
+export default {
+  mounted() {
+    if (!userStore.token) {
+      this.$router.push("/auth/sign-in");
+    }
+  },
+};
 </script>
