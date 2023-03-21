@@ -11,6 +11,10 @@ const api = axios.create({
 
 export default reactive({
   token: localStorage.getItem("pvak"),
+  user: {
+    id: "e123...",
+    login: "admin",
+  },
 
   async signInWithPassword({ login, password }) {
     login = login?.trim();
@@ -67,5 +71,10 @@ export default reactive({
     } catch (e) {
       throw e;
     }
+  },
+
+  signOut() {
+    this.token = null;
+    localStorage.removeItem("pvak");
   },
 });

@@ -124,11 +124,15 @@
         >
           Sign in
         </v-btn>
-        <RouterLink to="/auth/sign-up" class="text-decoration-none">
-          <v-btn type="submit" block color="light" style="border-radius: 0">
-            Create account
-          </v-btn>
-        </RouterLink>
+        <v-btn
+          type="submit"
+          block
+          color="light"
+          style="border-radius: 0"
+          to="/auth/sign-up"
+        >
+          Create account
+        </v-btn>
       </v-card>
     </v-form>
   </v-sheet>

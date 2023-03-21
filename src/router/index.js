@@ -8,9 +8,52 @@ const routes = [
     children: [
       {
         path: "",
-        name: "Home",
-        component: () =>
-          import(/* webpackChunkName: "home" */ "@/views/Home.vue"),
+        name: "home",
+        component: () => import("@/views/Home.vue"),
+      },
+    ],
+  },
+  {
+    path: "/settings",
+    component: () => import("@/layouts/default/Default.vue"),
+    children: [
+      {
+        path: "",
+        name: "settings",
+        component: () => import("@/views/Home/Settings.vue"),
+      },
+    ],
+  },
+  {
+    path: "/vpns",
+    component: () => import("@/layouts/default/Default.vue"),
+    children: [
+      {
+        path: "",
+        name: "myVpns",
+        component: () => import("@/views/Home/Vpns.vue"),
+      },
+    ],
+  },
+  {
+    path: "/sub",
+    component: () => import("@/layouts/default/Default.vue"),
+    children: [
+      {
+        path: "",
+        name: "sub",
+        component: () => import("@/views/Home/Sub.vue"),
+      },
+    ],
+  },
+  {
+    path: "/sign-out",
+    component: () => import("@/layouts/default/Default.vue"),
+    children: [
+      {
+        path: "",
+        name: "signOut",
+        component: () => import("@/views/Auth/SignOut.vue"),
       },
     ],
   },
@@ -20,7 +63,7 @@ const routes = [
     children: [
       {
         path: "",
-        name: "Sign-In",
+        name: "signIn",
         component: () => import("@/views/Auth/SignIn.vue"),
       },
     ],
@@ -31,7 +74,7 @@ const routes = [
     children: [
       {
         path: "",
-        name: "Sign-Up",
+        name: "signUp",
         component: () => import("@/views/Auth/SignUp.vue"),
       },
     ],
