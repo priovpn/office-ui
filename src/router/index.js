@@ -36,6 +36,17 @@ const routes = [
     ],
   },
   {
+    path: "/devices",
+    component: () => import("@/layouts/default/Default.vue"),
+    children: [
+      {
+        path: "",
+        name: "myDevices",
+        component: () => import("@/views/Home/Devices.vue"),
+      },
+    ],
+  },
+  {
     path: "/sub",
     component: () => import("@/layouts/default/Default.vue"),
     children: [
@@ -59,7 +70,7 @@ const routes = [
   },
   {
     path: "/auth/sign-in",
-    component: () => import("@/layouts/default/Auth.vue"),
+    component: () => import("@/layouts/auth/Default.vue"),
     children: [
       {
         path: "",
@@ -70,7 +81,7 @@ const routes = [
   },
   {
     path: "/auth/sign-up",
-    component: () => import("@/layouts/default/Auth.vue"),
+    component: () => import("@/layouts/auth/Default.vue"),
     children: [
       {
         path: "",

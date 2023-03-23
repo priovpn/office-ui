@@ -2,6 +2,7 @@ export default {
   menubar: {
     home: "Home",
     myVpns: "My VPNs",
+    myDevices: "My devices",
     sub: "Subscription",
     settings: "Settings",
     signOut: "Sign out",
@@ -22,10 +23,13 @@ export default {
     },
   },
   tableCols: {
+    id: "ID",
     name: "Name",
     status: "Status",
     loc: "Location",
     protocols: "Protocols",
+    ip: "IP",
+    lastConnect: "Last connect",
   },
   main: {
     status: {
@@ -45,6 +49,9 @@ export default {
       restart: "Restart",
       delete: "Delete",
       edit: "Edit",
+      block: "Block",
+      unblock: "Unblock",
+      limitTraffic: "Limit traffic",
     },
   },
 };

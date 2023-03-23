@@ -5,4 +5,5 @@ export default {
       : "https://oapi.priovpn.cc/api",
   localeKey: "pvLocale",
   drawerKey: "pvDrawer",
+  tokenKey: "pvak",
 };

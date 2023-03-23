@@ -33,12 +33,17 @@
 
     <span>v{{ version }}</span>
   </v-system-bar>
-  <v-navigation-drawer v-model="drawer" expand-on-hover rail>
+  <v-navigation-drawer
+    v-model="drawer"
+    expand-on-hover
+    rail
+    v-if="userStore.user"
+  >
     <v-list>
       <v-list-item
         prepend-avatar="/icon_circle.png"
         :title="userStore.user.login"
-        :subtitle="userStore.user.id"
+        :subtitle="userStore.user._id"
       ></v-list-item>
     </v-list>
 
@@ -56,6 +61,12 @@
         :title="$vuetify.locale.t('$vuetify.menubar.myVpns')"
         value="myVpns"
         to="/vpns"
+      ></v-list-item>
+      <v-list-item
+        prepend-icon="mdi-devices"
+        :title="$vuetify.locale.t('$vuetify.menubar.myDevices')"
+        value="devices"
+        to="/devices"
       ></v-list-item>
       <v-list-item
         prepend-icon="mdi-account-credit-card"
@@ -81,6 +92,7 @@
   <v-app-bar
     prominent
     :title="$vuetify.locale.t(`$vuetify.menubar.${$route.name}`)"
+    v-if="userStore.user"
   >
     <v-spacer></v-spacer>
 

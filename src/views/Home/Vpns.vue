@@ -22,6 +22,9 @@
             <thead>
               <tr>
                 <th class="text-left">
+                  {{ $vuetify.locale.t("$vuetify.tableCols.id") }}
+                </th>
+                <th class="text-left">
                   {{ $vuetify.locale.t("$vuetify.tableCols.name") }}
                 </th>
                 <th class="text-left">
@@ -37,7 +40,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="item in data" :key="item.name">
+              <tr v-for="item in vpnsStore.data" :key="item.name">
+                <td>{{ item._id }}</td>
                 <td>{{ item.name }}</td>
                 <td>
                   <StatusCol :status="item.status" />
@@ -84,29 +88,23 @@
 import StatusCol from "@/components/Cols/Status.vue";
 import ProtocolsCol from "@/components/Cols/Protocols.vue";
 import VpnsActionsCol from "@/components/Cols/VpnsActions.vue";
+import vpnsStore from "@/store/vpns.store";
 export default {
   components: {
     StatusCol,
     ProtocolsCol,
     VpnsActionsCol,
   },
-  data() {
+  setup() {
     return {
-      data: [
-        {
-          name: "Test",
-          status: "running",
-          location: "Lappeenranta, Finland",
-          protocols: ["openvpn", "wireguard"],
-        },
-        {
-          name: "Test 2",
-          status: "running",
-          location: "Nuremberg, Germany",
-          protocols: ["outline"],
-        },
-      ],
+      vpnsStore,
     };
+  },
+  data() {
+    return {};
+  },
+  async created() {
+    await vpnsStore.fetch();
   },
 };
 </script>

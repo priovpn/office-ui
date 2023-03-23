@@ -1,80 +1,83 @@
+/* eslint-disable no-useless-catch */
 import { reactive } from "vue";
-import axios from "axios";
 import * as bip39 from "@scure/bip39";
 import { wordlist } from "@scure/bip39/wordlists/english";
-import AES from "crypto-js/aes";
+import api, { getToken } from "@/api";
 import consts from "@/consts";
-
-const api = axios.create({
-  baseURL: consts.apiUrl,
-});
+import statusStore from "./status.store";
+import { SHA512 } from "crypto-js";
 
 export default reactive({
-  token: localStorage.getItem("pvak"),
-  user: {
-    id: "e123...",
-    login: "admin",
-  },
+  token: getToken(),
+  user: null,
+  mnemonic: null,
 
-  async signInWithPassword({ login, password }) {
-    login = login?.trim();
-    password = password?.trim();
-
-    if (!/^[A-Za-z][A-Za-z0-9_]{4,14}$/.test(login))
-      throw {
-        code: "INVALID_LOGIN",
-        message: "Invalid login",
-      };
-
-    if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,50}$/.test(password))
-      throw {
-        code: "INVALID_PASSWORD",
-        message: "Invalid password",
-      };
-
-    if (!login || !password)
-      throw {
-        code: "INVALID_LOGIN_OR_PASSWORD",
-        message: "Invalid login or password",
-      };
-
-    // eslint-disable-next-line no-useless-catch
+  async fetch() {
     try {
-      const { data } = await api.post("/signIn", {
-        login: AES.encrypt(login, "prio").toString(),
-        password: AES.encrypt(password, "prio").toString(),
-      });
-      console.log(data);
+      this.user = (await api.get("/user")).data;
     } catch (e) {
-      throw e;
+      statusStore.status = "issues";
+      sessionStorage.removeItem(consts.tokenKey);
+      localStorage.removeItem(consts.tokenKey);
+      this.token = null;
     }
+
+    return this.user;
   },
 
-  async signInWithRecoveryKey(rk) {
-    // Validate recovery key
+  async signInWithKey(rk) {
+    // Validate key
     const isValid = bip39.validateMnemonic(rk, wordlist);
     if (!isValid)
       throw {
-        code: "INVALID_RECOVERY_KEY",
-        message: "Invalid recovery key",
+        code: "INVALID_KEY",
+        message: "Invalid key",
       };
 
-    const seed = btoa(await bip39.mnemonicToSeed(rk));
+    const seed = SHA512((await bip39.mnemonicToSeed(rk)).toString()).toString();
     console.log(seed);
 
-    // eslint-disable-next-line no-useless-catch
     try {
       const { data } = await api.post("/signIn", {
-        seed: AES.encrypt(seed, "prio").toString(),
+        seed: seed,
       });
-      console.log(data);
+
+      if (data.success && data.token) {
+        this.token = data.token;
+        return true;
+      }
     } catch (e) {
-      throw e;
+      throw e.response?.data
+        ? {
+            code: e.response.data.code,
+            message: e.response.data.message,
+          }
+        : e;
+    }
+  },
+
+  async signUp(payload) {
+    try {
+      const { data } = await api.post("/signUp", payload);
+
+      if (data.success && data.token) {
+        this.token = data.token;
+        this.mnemonic = data.mnemonic;
+        return true;
+      }
+    } catch (e) {
+      throw e.response?.data
+        ? {
+            code: e.response.data.code,
+            message: e.response.data.message,
+          }
+        : e;
     }
   },
 
   signOut() {
     this.token = null;
-    localStorage.removeItem("pvak");
+    sessionStorage.removeItem(consts.tokenKey);
+    localStorage.removeItem(consts.tokenKey);
   },
 });

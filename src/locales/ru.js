@@ -2,6 +2,7 @@ export default {
   menubar: {
     home: "Главная",
     myVpns: "Мои VPN",
+    myDevices: "Мои устройства",
     sub: "Подписка",
     settings: "Настройки",
     signOut: "Выйти из аккаунта",
@@ -22,10 +23,13 @@ export default {
     },
   },
   tableCols: {
+    id: "ID",
     name: "Название",
     status: "Состояние",
     loc: "Расположение",
     protocols: "Протоколы",
+    ip: "IP",
+    lastConnect: "Посл. подключение",
   },
   main: {
     status: {
@@ -45,6 +49,9 @@ export default {
       restart: "Перезапустить",
       delete: "Удалить",
       edit: "Изменить",
+      block: "Заблокировать",
+      unblock: "Разблокировать",
+      limitTraffic: "Лимит трафика",
     },
   },
 };

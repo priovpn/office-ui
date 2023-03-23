@@ -16,6 +16,7 @@
     "core-js": "^3.8.3",
     "crypto-js": "^4.1.1",
     "leaflet": "^1.9.3",
+    "moment": "^2.29.4",
     "roboto-fontface": "*",
     "vue": "^3.2.13",
     "vue-router": "^4.0.0",
