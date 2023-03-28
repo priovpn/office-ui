@@ -146,10 +146,10 @@ export default reactive({
             this.user.login,
             data.challenge,
             {
-              authenticatorType: "auto",
+              authenticatorType: "local",
               userVerification: "preferred",
               timeout: 60000,
-              attestation: false,
+              attestation: true,
               debug: false,
             }
           );
