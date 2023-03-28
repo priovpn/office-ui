@@ -16,7 +16,7 @@ export default reactive({
   },
 
   async fetch() {
-    const res = await api.devices.fetch({
+    const res = await api.sessions.fetch({
       perPage: this.pagination.perPage,
       page: this.pagination.page,
       groupBy: this.pagination.groupBy,
@@ -27,14 +27,14 @@ export default reactive({
     return res;
   },
 
-  async create(data) {
-    await api.devices.create(data);
+  async close(id) {
+    await api.sessions.close(id);
     this.selected = [];
     await this.fetch();
   },
 
-  async remove(id) {
-    await api.devices.delete(id);
+  async block(id) {
+    await api.sessions.block(id);
     this.selected = [];
     await this.fetch();
   },

@@ -56,7 +56,7 @@ import vpnsStore from "@/store/vpns.store";
 
 export default {
   props: {
-    item: Object,
+    selected: Object,
   },
   data() {
     return {};
@@ -66,15 +66,15 @@ export default {
       await vpnsStore.stop(item._id);
       await vpnsStore.fetch();
     },
-    async restart(item) {
+    async restart() {
       await vpnsStore.restart(item._id);
       await vpnsStore.fetch();
     },
-    async start(item) {
+    async start() {
       await vpnsStore.start(item._id);
       await vpnsStore.fetch();
     },
-    async edit(item) {
+    async edit() {
       // await vpnsStore.edit(item._id);
       // await vpnsStore.fetch();
     },

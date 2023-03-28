@@ -11,12 +11,12 @@
         ></v-alert>
         <v-alert
           type="warning"
-          text="Copy key to a safe place. You will not be able to recover it later."
+          :text="$vuetify.locale.t('$vuetify.auth.copyKeyPrompt')"
           style="font-size: 17px; border-radius: 0"
           v-if="userStore.mnemonic"
         ></v-alert>
         <v-text-field
-          label="Login"
+          :label="$vuetify.locale.t('$vuetify.auth.login')"
           hide-details="auto"
           v-model="login"
           :loading="loading"
@@ -132,7 +132,7 @@
             @click.prevent="endSignUp"
             :loading="loading"
           >
-            Okay
+            {{ $vuetify.locale.t("$vuetify.auth.okay") }}
           </v-btn>
         </div>
         <v-btn
@@ -144,7 +144,7 @@
           :loading="loading"
           v-if="!userStore.mnemonic"
         >
-          Sign up
+          {{ $vuetify.locale.t("$vuetify.auth.signUp") }}
         </v-btn>
         <v-btn
           type="submit"
@@ -154,7 +154,7 @@
           to="/auth/sign-in"
           :loading="loading"
         >
-          I have an account
+          {{ $vuetify.locale.t("$vuetify.auth.iHaveAccount") }}
         </v-btn>
       </v-card>
     </v-form>
@@ -180,6 +180,24 @@ export default {
   },
 
   methods: {
+    async _withLoading(fn) {
+      this.loading = true;
+      try {
+        await fn();
+        this.error = null;
+      } catch (e) {
+        this.error = {
+          ...e,
+          message:
+            this.$vuetify.locale.messages[this.$vuetify.locale.current].errors[
+              e.message
+            ] ?? e.message,
+        };
+        this.isFido = false;
+      }
+      this.loading = false;
+    },
+
     async onSignUp() {
       if (!/^[A-Za-z][A-Za-z0-9_]{4,14}$/.test(this.login)) {
         this.error = {
@@ -187,22 +205,17 @@ export default {
           message: "Invalid login",
         };
       } else {
-        this.loading = true;
-        try {
+        await this._withLoading(async () => {
           await userStore.signUp({ login: this.login });
           userStore.mnemonic
             .split(" ")
             .map((m, i) => (this.rkPhrases[String(i + 1)] = m));
-          this.loading = false;
-        } catch (e) {
-          this.loading = false;
-          this.error = e;
-        }
+        });
       }
     },
 
     async onRecoveryCopy() {
-      navigator.clipboard.writeText(this.rkPhrases.join(" "));
+      navigator.clipboard.writeText(this.rkPhrases.join(" ").trim());
     },
 
     endSignUp(e) {

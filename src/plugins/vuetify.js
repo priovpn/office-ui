@@ -10,6 +10,7 @@ import "vuetify/styles";
 
 // Composables
 import { createVuetify } from "vuetify";
+import { VDataTableServer } from "vuetify/labs/VDataTable";
 import consts from "@/consts";
 import en from "@/locales/en.js";
 import ru from "@/locales/ru.js";
@@ -30,5 +31,8 @@ export default createVuetify({
     locale: localStorage.getItem(consts.localeKey),
     fallback: "en",
     messages: { en, ru },
+  },
+  components: {
+    VDataTableServer,
   },
 });

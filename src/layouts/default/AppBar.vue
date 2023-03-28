@@ -7,6 +7,12 @@
       style="color: unset"
     >
       <v-icon
+        icon="mdi-clock"
+        class="me-2"
+        style="color: gray"
+        v-if="!statusStore.status"
+      ></v-icon>
+      <v-icon
         icon="mdi-check"
         class="me-2"
         style="color: green"
@@ -43,7 +49,7 @@
       <v-list-item
         prepend-avatar="/icon_circle.png"
         :title="userStore.user.login"
-        :subtitle="userStore.user._id"
+        :subtitle="parsers.cutUserId(userStore.user._id)"
       ></v-list-item>
     </v-list>
 
@@ -124,6 +130,7 @@
 import userStore from "@/store/user.store";
 import statusStore from "@/store/status.store";
 import consts from "@/consts";
+import * as parsers from "@/utils/parsers";
 import { useLocale } from "vuetify/lib/framework.mjs";
 
 export default {
@@ -135,6 +142,7 @@ export default {
       version: process.env.version,
       changeLocale: (locale) => (current.value = locale),
       statusStore,
+      parsers,
     };
   },
 

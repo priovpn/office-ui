@@ -6,4 +6,6 @@ export default {
   localeKey: "pvLocale",
   drawerKey: "pvDrawer",
   tokenKey: "pvak",
+  mnemonicKey: "__key",
+  mnemonicKeyTs: "__key_ts",
 };
