@@ -150,7 +150,7 @@ export default reactive({
               userVerification: "preferred",
               timeout: 60000,
               attestation: true,
-              debug: false,
+              debug: true,
             }
           );
 
