@@ -185,8 +185,8 @@ export default reactive({
 
   async authenticateFido(challenge, credentials) {
     const authentication = await client.authenticate(credentials, challenge, {
-      authenticatorType: "auto",
-      userVerification: "required",
+      authenticatorType: "local",
+      userVerification: "preferred",
       timeout: 60000,
     });
 
