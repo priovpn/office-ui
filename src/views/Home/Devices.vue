@@ -1,9 +1,9 @@
 <template>
-  <v-container>
-    <v-row justify="center" dense>
-      <v-col cols="12" md="12" lg="9"> <CTable /> </v-col>
-    </v-row>
-  </v-container>
+  <v-row justify="center" dense no-gutters="">
+    <v-col cols="12" md="12" lg="12">
+      <CTable />
+    </v-col>
+  </v-row>
 </template>
 
 <script>

@@ -19,6 +19,8 @@ export function parseUA(uaString) {
 }
 
 export function cutId(_id) {
+  if (typeof _id !== "string") return;
+
   return _id.slice(0, _id.length - 16);
 }
 

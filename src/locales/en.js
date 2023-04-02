@@ -47,6 +47,17 @@ export default {
     INVALID_KEY: "Invalid key",
   },
   settings: {
+    sections: {
+      sessions: {
+        _tabName: "Sessions",
+      },
+      security: {
+        _tabName: "Security",
+      },
+      deleteData: {
+        _tabName: "Delete data",
+      },
+    },
     cards: {
       sessions: "Sessions",
       account: "Account",
@@ -130,14 +141,14 @@ export default {
       unblock: "Unblock",
       limitTraffic: "Limit traffic",
       confirm: "Confirm",
-      setting2FA: "Setting 2FA",
+      setting2FA: "Two-factor authentication (2FA)",
       resetKey: "Reset key",
       deleteData: "Delete data",
-      settingFIDO: "Biometric login settings",
+      settingFIDO: "Biometric authentication",
       enable2FA: "Enable 2FA",
       disable2FA: "Disable 2FA",
-      enableFIDO: "Setting up biometry",
-      disableFIDO: "Disable biometric login",
+      enableFIDO: "Enable biometric auth",
+      disableFIDO: "Disable biometric auth",
       linkCurrentDevice: "Link current device",
     },
     labels: {
@@ -156,4 +167,5 @@ export default {
     firstPage: "First page",
     lastPage: "Last page",
   },
+  noDataText: "No data",
 };

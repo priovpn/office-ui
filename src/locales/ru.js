@@ -136,8 +136,8 @@ export default {
       disable2FA: "Отключить 2FA",
       settingFIDO: "Настройки входа по биометрии",
       enableFIDO: "Настроить биометрию",
-      disableFIDO: "Отключить вход по биометрии",
-      linkCurrentDevice: "Привязать текущее устройство",
+      disableFIDO: "Откл. вход по биометрии",
+      linkCurrentDevice: "Привязать текущее уст-во",
     },
     labels: {
       enterCode: "Введите код",

@@ -90,11 +90,11 @@
       </template>
       <template v-slot:item.vpns="{ item }">
         <v-chip v-for="(i, k) in item.raw.vpns ?? []" :key="k">{{
-          parsers.cutId(k)
+          parsers.cutId(i)
         }}</v-chip>
       </template>
       <template v-slot:item.createdAt="{ item }">
-        {{ parsers.parseDurationDate(item.raw.openedAt) }}
+        {{ parsers.parseDurationDate(item.raw.createdAt) }}
       </template>
     </v-data-table-server>
   </v-card>

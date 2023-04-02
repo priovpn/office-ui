@@ -12,6 +12,8 @@ export default reactive({
   token: getToken(),
   user: null,
   mnemonic: null,
+  accounts: [],
+  selectedAccount: null,
 
   async fetch() {
     try {
@@ -24,6 +26,25 @@ export default reactive({
     }
 
     return this.user;
+  },
+
+  async fetchAccounts() {
+    this.accounts = JSON.parse(
+      localStorage.getItem(consts.accountsKey) ?? "[]"
+    );
+    return this.accounts;
+  },
+
+  async addAccount(account) {
+    this.accounts.push(account);
+    localStorage.setItem(consts.accountsKey, JSON.stringify(this.accounts));
+  },
+
+  async updateAccount(accountName, mnemonic) {
+    const account = this.accounts.find((a) => a.name === accountName);
+    if (!account) return;
+    account.mnemonic = mnemonic;
+    localStorage.setItem(consts.accountsKey, JSON.stringify(this.accounts));
   },
 
   async signInWithKey(rk, code = undefined, car = undefined) {
@@ -76,7 +97,12 @@ export default reactive({
   },
 
   async signOut() {
-    await api.auth.signOut();
+    try {
+      await api.auth.signOut();
+    } catch (_) {
+      //
+    }
+
     window.location.href = "/";
   },
 

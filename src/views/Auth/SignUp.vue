@@ -1,6 +1,5 @@
 <template>
   <v-sheet width="320" class="mx-auto">
-    <img class="mb-5" src="@/assets/logo.svg" />
     <v-form validate-on="submit" @submit.prevent="onSignUp">
       <v-card>
         <v-alert
