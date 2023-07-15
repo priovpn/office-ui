@@ -1,63 +1,66 @@
-<template>
-  <nav class="navbar bg-body-tertiary p-4">
-    <div class="container-fluid ps-5 pe-5">
-      <div class="d-flex justify-content-start">
-        <a class="navbar-brand" href="/">
-          <img src="@/assets/img/logo.svg" width="180" />
-        </a>
-      </div>
-      <div class="d-flex justify-content-center align-items-center">
-        <div class="d-flex justify-content-between">
-          <div class="pe-5">
-            <a href="#" class="text-white">
-              <DevicesIcon :size="26" />
-            </a>
-          </div>
-          <div class="pe-5">
-            <a href="#" class="text-white active">
-              <NetworkOutlineIcon :size="26" />
-            </a>
-          </div>
-          <div class="pe-5">
-            <a href="#" class="text-white">
-              <AccountCreditCardOutlineIcon :size="26" />
-            </a>
-          </div>
-          <div>
-            <a href="#" class="text-white">
-              <CogOutlineIcon :size="26" />
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="d-flex justify-content-end align-items-center">
-        <div class="navbar-text text-white p-0">
-          <div class="d-flex flex-column align-items-start">
-            <div>admin</div>
-            <div>setgwae3sgestgsgts</div>
-          </div>
-        </div>
-        <LogoutIcon :size="24" class="ps-5 text-white" />
-      </div>
-    </div>
-  </nav>
-</template>
+<template>/</template>
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import DevicesIcon from 'vue-material-design-icons/Devices.vue'
-import NetworkOutlineIcon from 'vue-material-design-icons/NetworkOutline.vue'
-import AccountCreditCardOutlineIcon from 'vue-material-design-icons/AccountCreditCardOutline.vue'
-import CogOutlineIcon from 'vue-material-design-icons/CogOutline.vue'
-import LogoutIcon from 'vue-material-design-icons/Logout.vue'
+import user from '@/store/UserStore'
+// import DevicesIcon from 'vue-material-design-icons/Devices.vue'
+// import NetworkOutlineIcon from 'vue-material-design-icons/NetworkOutline.vue'
+// import AccountCreditCardOutlineIcon from 'vue-material-design-icons/AccountCreditCardOutline.vue'
+// import CogOutlineIcon from 'vue-material-design-icons/CogOutline.vue'
+// import LogoutIcon from 'vue-material-design-icons/Logout.vue'
+import { UserEntity } from '@priovpn/shared'
+import storeKeys from '@/storeKeys'
 
 @Options({
   components: {
-    DevicesIcon,
-    NetworkOutlineIcon,
-    AccountCreditCardOutlineIcon,
-    CogOutlineIcon,
-    LogoutIcon
+    // DevicesIcon,
+    // NetworkOutlineIcon,
+    // AccountCreditCardOutlineIcon,
+    // CogOutlineIcon,
+    // LogoutIcon
+  },
+
+  setup() {
+    return {
+      user: user.data
+    }
   }
 })
-export default class HomeView extends Vue {}
+export default class HomeView extends Vue {
+  public user: UserEntity | undefined
+
+  async created() {
+    // Fetch user data if logged in
+    if (user.isLoggedIn) {
+      const profile = await user.fetch()
+      console.log(profile)
+      if (!profile || (profile as any).httpCode) {
+        localStorage.removeItem(storeKeys.apiToken)
+        window.location.href = '/'
+      }
+    } else this.$router.push({ name: 'signIn' })
+  }
+}
 </script>
+<style lang="scss" scoped>
+// Small devices (landscape phones, 576px and up)
+// @media (max-width: 992px) {
+//   .navbar > .container-fluid > .d-flex {
+//     &.-pv-logo-c {
+//       margin-bottom: 21px;
+//       width: 100%;
+//       justify-content: center !important;
+//     }
+
+//     &.-pv-links-c {
+//       width: 100%;
+//       margin-bottom: 25px;
+//     }
+
+//     &.-pv-user-c {
+//       margin-bottom: 0;
+//       width: 100%;
+//       justify-content: space-evenly !important;
+//     }
+//   }
+// }
+</style>

@@ -1,0 +1,76 @@
+input.form-control {
+  background-color: #1a252e !important;
+  color: white !important;
+  border: none;
+  &::placeholder {
+    color: white;
+    opacity: 0.4;
+  }
+  &::active {
+    background-color: unset;
+  }
+  &.pc {
+    font-size: 1.3rem;
+    font-weight: 300;
+    padding: 6px 12px 6px;
+    border-radius: 4px;
+  }
+  &.wb {
+    background-color: white;
+    color: #1a252e;
+    &::placeholder {
+      color: #1a252e;
+      opacity: 0.8;
+      font-weight: 300;
+    }
+  }
+  &.bn {
+    border-radius: 0;
+  }
+  &.fk {
+    font-size: 15px;
+    text-align: center;
+  }
+  &.ai {
+    background-color: #162029 !important;
+    font-size: 19px;
+    padding: 7px 15px 7px;
+    font-weight: 300;
+  }
+  &:focus {
+    box-shadow: 0 9px 25px #16202934, 0 0px 25px #1620292e;
+  }
+}
+
+button.btn {
+  &.bn {
+    border-radius: 0;
+  }
+  &.btn-dark {
+    background-color: #1a252e;
+  }
+  &.fc {
+    width: 100%;
+  }
+}
+
+.tb {
+  font-weight: 900;
+}
+
+.tbs {
+  font-weight: 900;
+  font-size: 15px;
+}
+
+.td {
+  color: #1a252e;
+}
+
+.cp {
+  cursor: pointer;
+  user-select: none;
+  img {
+    pointer-events: none;
+  }
+}

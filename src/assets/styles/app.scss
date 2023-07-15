@@ -1,58 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import './font.scss';
+@import './variables.scss';
 
-html, body {
-  background-color: #19252e;
-}
-
-#app {
-  font-family: 'Inter', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-
-.mainSection {
-  border: none;
-  border-radius: 50px;
-  height: 100vh;
-}
-
-.navbar {
-  .navbar-text > div {
-    & > div:first-child {
-      font-size: 17px;
-      font-weight: 600;
-    }
-    & > div:nth-child(2) {
-      font-size: 13.8px;
-      font-weight: 300;
-      line-height: 1;
-    }
-  }
-}
-
-.active {
-  background: white;
-  color: #19252d !important;
-  border-radius: 3px;
-  padding: 5px 5px 9px 5px;
-}
-
-// // Small devices (landscape phones, 576px and up)
-// @media (min-width: 576px) {
-  
-// }
-
-// // Medium devices (tablets, 768px and up)
-// @media (min-width: 768px) { ... }
-
-// // Large devices (desktops, 992px and up)
-// @media (min-width: 992px) { ... }
-
-// // X-Large devices (large desktops, 1200px and up)
-// @media (min-width: 1200px) { ... }
-
-// // XX-Large devices (larger desktops, 1400px and up)
-// @media (min-width: 1400px) { ... }
+@import './components/grid.scss';
+@import './components/card.scss';
+@import './components/input.scss';
